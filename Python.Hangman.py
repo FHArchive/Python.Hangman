@@ -8,7 +8,7 @@ countries below.
 """
 # This module is used to pick a random word from the list below
 import random
-# A list of random words 
+# A list of random words
 wordsList = ['Afghanistan','Albania','Algeria','Angola','Antarctica',
              'Argentina','Australia','Austria','Azerbaijan','Bahamas',
              'Bangladesh','Barbados','Belarus','Belgium','Bermuda',
@@ -33,22 +33,24 @@ wordsList = ['Afghanistan','Albania','Algeria','Angola','Antarctica',
              'Turkey','Ukraine','United Kingdom','United States']
 # A list of correct guesses
 """
-The space is needed to win where there are two words 
+The space is needed to win where there are two words
 """
 goodGuesses = [' ']
 # A list of incorrect guesses
 badGuesses = []
 # The maximum number of strikes allowed
 strikes = 7
-# Flag for the end of the game. Start at false 
+# Flag for the end of the game. Start at false
 endGame = 0
 # Flag to identify if the word has been guessed
 complete = 0
 # Get the random word
-guessWord = wordsList[random.randint(0,len(wordsList)-1)]
+# Use SystemRandom
+systemRandom = random.SystemRandom()
+guessWord = wordsList[systemRandom.randint(0,len(wordsList)-1)]
 # Make it uppercase
 guessWord = guessWord.upper()
-# Make it into a list 
+# Make it into a list
 guessList = list(guessWord)
 
 """
@@ -64,9 +66,9 @@ def main(guessList):
     userGuess = input('>>>')
     userGuess = userGuess.upper()
     isInList = 0
-    for i in range( len(guessList)):
+    for guess in guessList:
         # isInList is true if the user input is in the guessList
-        if userGuess == guessList[i]:
+        if userGuess == guess:
             isInList = 1
     if isInList == 1:
         # If it is, add it to the list of correct guesses
@@ -92,7 +94,7 @@ def isEndGame(guessWord):
 This method checks for a win 
 """
 def hasWon(guessWord):
-    # Win by default 
+    # Win by default
     complete = 1
     for letter in guessWord:
         # If there is a letter in the word to guess that isn't in goodGuesses
@@ -108,7 +110,7 @@ This method is used to draw the game. Print the number of strikes, the incorrect
 guesses, the correct guesses and the word. For undiscovered letters, print '-'
 """
 def draw(badGuesses, goodGuesses, guessWord,strikes):
-    # Print the number of strikes 
+    # Print the number of strikes
     print("Strikes: {}/{}".format(len(badGuesses),strikes))
     print("")
     # Print the list of incorrect guesses
@@ -129,13 +131,13 @@ def draw(badGuesses, goodGuesses, guessWord,strikes):
             print("-", end="")
     print("")
 
-# Draw the game once 
+# Draw the game once
 draw(badGuesses, goodGuesses, guessWord,strikes)
-# While gameOver = false and won = false 
+# While gameOver = false and won = false
 while endGame == 0 and complete == 0:
     # Run the game back end...
     main(guessList)
-    # Render the game 
+    # Render the game
     draw(badGuesses, goodGuesses, guessWord,strikes)
     # Is there a game over?
     endGame = isEndGame(guessWord)
