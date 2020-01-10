@@ -13,7 +13,7 @@
 # Python.Hangman
 
 
-<img src="readme-assets/icons/name.png" alt="Project Icon" width="100">
+<img src="readme-assets/icons/name.png" alt="Project Icon" width="750">
 
 This is a game of hangman that runs in the command line or the Python Shell.
 The user has 7 strikes and must guess the word
